@@ -108,8 +108,7 @@ h3 {
 }
 
 .container { 
-  height: 750px;
-  position: relative;
+  position: inherit;
 }
 
 .center {
