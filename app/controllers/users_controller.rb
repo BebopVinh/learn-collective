@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 
    def show
       @user = current_user
-      @contributions = @user.contributions.reverse
+      # @contributions = @user.contributions.reverse
+      @contributions = Contribution.order_by_name(@user)
    end
 end
