@@ -33,7 +33,10 @@ class LessonsController < ApplicationController
                @contribution = Contribution.new
                render :show
             end
-            format.json {render json: @lesson, status: 200}      
+            format.json do
+               authenticate_user!
+               render json: @lesson, status: 200
+            end 
          end
       end
    end
