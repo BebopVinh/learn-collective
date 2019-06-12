@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show]
   resources :categories, only: [:index, :show]
+  resources :sections, only: [:show]
 
   root to:"application#home"
 
