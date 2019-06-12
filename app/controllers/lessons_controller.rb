@@ -27,12 +27,18 @@ class LessonsController < ApplicationController
    def show
       if @lesson.nil?
          redirect_to lessons_path, alert: "Lesson not found."
+      else
+         respond_to do |format|
+            format.html do
+               @contribution = Contribution.new
+               render :show
+            end
+            format.json {render json: @lesson, status: 200}      
+         end
       end
-      @contribution = Contribution.new
    end
 
    def edit
-
    end
 
    def update
