@@ -1,8 +1,8 @@
 <h1>All the Categories, yo!</h1>
 
 <% @categories.each do |c| %>
-   <div>
-      <%= link_to c.name, '#', class: "category", id: c.id, data: {id: c.id} %>
+   <div class="category" id="<%= c.id %>">
+      <%= link_to c.name, 'javascript:', class: "category", id: c.id, data: {id: c.id} %>
    </div>
 <% end %>
 
