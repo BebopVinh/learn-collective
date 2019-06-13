@@ -21,7 +21,7 @@ class LessonsController < ApplicationController
    end
 
    def index
-      @lessons = Lesson.all.reverse
+      @lessons = Lesson.all_sorted
    end
 
    def show
@@ -35,7 +35,7 @@ class LessonsController < ApplicationController
             end
             format.json do
                authenticate_user!
-               render json: @lesson, status: 200
+               render json: @lesson, status: 200, include: ['contributions.user']
             end 
          end
       end
