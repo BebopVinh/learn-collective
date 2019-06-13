@@ -1,5 +1,9 @@
-<h1 class="post-title">Lesson: <%= @lesson.clean_name %></h1>
+<a href="javascript:" class="lesson-browser" id="previous">< Previous</a>
+..
+<a href="javascript:" class="lesson-browser" id="next">Next ></a>
 
+<h1 class="post-title">Lesson: <%= @lesson.clean_name %></h1>
+<%= hidden_field_tag "lesson-id", @lesson.id %>
 
 <%= link_to "Edit this Lesson", edit_lesson_path(@lesson), class: "pure-button button-warning" if @lesson.creator_is?(current_user) %>
 
@@ -14,12 +18,14 @@
 <br><br>
 
 <h2 class="content-subhead">Comments:</h2>
-<% @lesson.contributions.each do |c| %>
-   <section class="post">
-      <header class="post-header">
-         <h2 class="post-title">From <%= display_user(c)%><h2>
-      </header>
-      <div class="post-description trix-content"><%= sanitize c.content %></div>
-      <p><%= update_buttons(c) %></p>
-   </section>
-<% end %> 
+<div class="lesson-contributions">
+   <% @lesson.contributions.each do |c| %>
+      <section class="post">
+         <header class="post-header">
+            <h2 class="post-title">From <%= display_user(c)%></h2>
+         </header>
+         <div class="post-description trix-content"><%= sanitize c.content %></div>
+         <p><%= update_buttons(c) %></p>
+      </section>
+   <% end %> 
+</div>
