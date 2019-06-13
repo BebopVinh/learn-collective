@@ -12,5 +12,9 @@ class Lesson < ApplicationRecord
    def creator_is?(user)
       !!(self.creator_id == user.id) unless user.nil?
    end 
+
+   def self.all_sorted
+      self.all.sort_by(&:id).reverse
+   end
 end
  
