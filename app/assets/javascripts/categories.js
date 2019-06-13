@@ -22,6 +22,7 @@ $(document).on('ready page:load', function () {
             </ul>`
          )
       })
+      debugger
    })
 
    $(document).on('click', 'a.section', function(event) {
@@ -44,7 +45,8 @@ $(document).on('ready page:load', function () {
                <strong>Lessons</strong>
                <br><br>
                ${sectionChild}
-            </ul>`
+            </ul>
+            <br><br>`
          )
       })
    })
