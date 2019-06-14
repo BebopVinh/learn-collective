@@ -5,8 +5,9 @@
 <h1 class="post-title">Lesson: <%= @lesson.clean_name %></h1>
 <%= hidden_field_tag "lesson-id", @lesson.id %>
 
+<div class="edit-button">
 <%= link_to "Edit this Lesson", edit_lesson_path(@lesson), class: "pure-button button-warning" if @lesson.creator_is?(current_user) %>
-
+</div>
 
 
 <h4 class="content-subhead">Add Hints and Tips For This Lesson</h4>
@@ -29,3 +30,4 @@
       </section>
    <% end %> 
 </div>
+
