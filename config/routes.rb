@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :categories, only: [:index, :show]
   resources :sections, only: [:show]
 
+  get '/authenticate/user', to: 'application#authenticate_user'
   root to:"application#home"
 
 end
