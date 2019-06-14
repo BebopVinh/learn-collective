@@ -26,8 +26,8 @@ $(document).on('ready page:load', function () {
 
    $(document).on('click', 'a.section', function(event) {
       event.preventDefault()
-      $("ul.lesson").remove()
       let id = $(this).data("id")
+      $("ul.lesson").remove()
       let sectionChild = ""
       $.get(`/sections/${id}.json`, function (section) {
          const lessons = section["lessons"]
@@ -38,14 +38,15 @@ $(document).on('ready page:load', function () {
                </li>
             `
          })
+
          $(`div.section#${id}`).append(
             `<ul class="lesson">
                <br>
                <strong>Lessons</strong>
                <br><br>
                ${sectionChild}
-            </ul>
-            <br><br>`
+               <br>
+            </ul>`
          )
       })
    })
