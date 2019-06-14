@@ -22,7 +22,6 @@ $(document).on('ready page:load', function () {
             </ul>`
          )
       })
-      debugger
    })
 
    $(document).on('click', 'a.section', function(event) {
