@@ -6,6 +6,8 @@ class LessonsController < ApplicationController
 
    def new
       @lesson = Lesson.new
+      @section = @lesson.build_section
+      @section.build_category
    end
 
    def create
@@ -65,7 +67,7 @@ class LessonsController < ApplicationController
       end
 
       def lesson_params
-         params.require(:lesson).permit(:name, :category, :section)
+         params.require(:lesson).permit(:name, section_attributes: [:name, category_attributes: [:name]])
       end
 
       def check_creator

@@ -5,6 +5,8 @@ class Lesson < ApplicationRecord
 
    validates_presence_of :name, :creator_id
 
+   accepts_nested_attributes_for :section, reject_if: :all_blank
+
    def clean_name
       name.gsub("-", " ")
    end

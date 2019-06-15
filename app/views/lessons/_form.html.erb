@@ -5,11 +5,15 @@
    <br>
    <br>
    
-   <%= f.label :category %>
-   <%= f.text_field :category %> <br><br>
+   <%= f.fields_for :section do |s| %>
+      <%= s.label :name, "Section:" %>
+      <%= s.text_field :name %> <br><br>
 
-   <%= f.label :section %>
-   <%= f.text_field :section %> <br><br>
+      <%= s.fields_for :category do |c| %>
+         <%= c.label :name, "Category:" %>
+         <%= c.text_field :name %> <br><br>
+      <% end %>
+   <% end %>
 
    <%= f.submit %>
 <% end %>
