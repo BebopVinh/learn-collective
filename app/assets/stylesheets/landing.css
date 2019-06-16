@@ -45,7 +45,7 @@ h3 {
   text-align: center;
 }
 
-main {
+div.auth-buttons {
   width: 80vw;
   left: 10%;
   height: 40vh;
