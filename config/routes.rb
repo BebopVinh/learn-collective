@@ -11,7 +11,13 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show]
   resources :categories, only: [:index, :show]
+  resources :sections, only: [:show]
 
+  get '/authenticate/user', to: 'application#authenticate_user'
+
+  # WIP: Filtered Sections based on Category Selection
+  # get '/filtered_sections', to: 'lessons#filtered_sections'
+  
   root to:"application#home"
 
 end

@@ -1,13 +1,18 @@
 class ContributionsController < ApplicationController
    before_action :authenticate_user!
    before_action :find_contribution, :check_contributor, only: [:edit, :update, :destroy]
+
    # before_action :check_contributor, only: [:edit, :update, :destroy]
 
    def create
       lesson = Lesson.find_by(id: params[:lesson_id])
       @contribution = Contribution.new(user: current_user, lesson: lesson, content: contribution_params[:content])
       if @contribution.save
-         redirect_to lesson_path(lesson)
+         # respond_to do |format|
+         #    format.html {redirect_to lesson_path(lesson)}
+         #    format.json {render json: @contribution}
+         # end
+         render json: @contribution
       else
          redirect_to lesson_path(lesson), alert: "Content was empty."
       end

@@ -1,15 +1,24 @@
 <%= form_for lesson, html: {class:"pure-form"} do |f| %>
    <%= f.label :name %>
-   <%= f.text_field :name %> <br><br>
-   <span class="pure-form-message-inline">Be as accurate as possible with the name.</span> 
+   <br>
+   <%= f.text_field :name %>
+   <span class="pure-form-message-inline">Be as accurate as possible.</span> 
    <br>
    <br>
    
-   <%= f.label :category %>
-   <%= f.text_field :category %> <br><br>
+   <%= f.fields_for :section do |s| %>
+      <%= s.fields_for :category do |c| %>
+         <%= c.label :name, "Category (Select this first!)" %>
+         <%= c.collection_select(:name, Category.all, :name, :name, {prompt: "Enter to select or create", selected: Category.last}, {class: "selectize"})%>
+      <% end %>
 
-   <%= f.label :section %>
-   <%= f.text_field :section %> <br><br>
+      <br><br>
+
+      <%= s.label :name, "Section" %>
+      <%= s.grouped_collection_select(:name, Category.all, :sections, :name, :name, :name, {prompt: "Enter to select or create"}, {class: "selectize", id: "select-lesson-section"}) %>
+      <br><br>
+   <% end %>
+
 
    <%= f.submit %>
 <% end %>

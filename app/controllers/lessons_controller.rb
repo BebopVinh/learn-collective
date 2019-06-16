@@ -4,11 +4,20 @@ class LessonsController < ApplicationController
    before_action :authenticate_user!, except: [:index, :show]
    before_action :check_creator, only: [:edit, :update, :destroy]
 
+   # WIP: Filtered Sections based on Category Selection
+   # def filtered_sections
+   #    @sections = Category.filtered_sections(params[:category_name])
+   #    render json: @sections, status: 201, include: [:id, :name]
+   # end
+
    def new
       @lesson = Lesson.new
+      @section = @lesson.build_section
+      @section.build_category
    end
 
    def create
+      binding.pry
       @lesson = Lesson.new(lesson_params) do |user|
          user.creator_id = current_user.id
       end
@@ -21,7 +30,7 @@ class LessonsController < ApplicationController
    end
 
    def index
-      @lessons = Lesson.all.reverse
+      @lessons = Lesson.all_sorted
    end
 
    def show
@@ -33,7 +42,10 @@ class LessonsController < ApplicationController
                @contribution = Contribution.new
                render :show
             end
-            format.json {render json: @lesson, status: 200}      
+            format.json do
+               authenticate_user!
+               render json: @lesson, status: 200, include: ['contributions.user']
+            end 
          end
       end
    end
@@ -62,7 +74,7 @@ class LessonsController < ApplicationController
       end
 
       def lesson_params
-         params.require(:lesson).permit(:name, :category, :section)
+         params.require(:lesson).permit(:name, section_attributes: [:name, category_attributes: [:name]])
       end
 
       def check_creator
