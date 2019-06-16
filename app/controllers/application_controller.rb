@@ -7,4 +7,7 @@ class ApplicationController < ActionController::Base
    def authenticate_user
       render json: {id: current_user.id}
    end
+
+   def dev_log
+   end
 end

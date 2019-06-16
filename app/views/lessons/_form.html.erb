@@ -9,13 +9,14 @@
    <%= f.fields_for :section do |s| %>
       <%= s.fields_for :category do |c| %>
          <%= c.label :name, "Category (Select this first!)" %>
-         <%= c.collection_select(:name, Category.all, :name, :name, {prompt: "Enter to select or create", selected: Category.last}, {class: "selectize"})%>
+         <%= c.collection_select(:name, Category.order(id: :desc), :name, :name, {selected: Category.last}, {class: "selectize"})%>
+         <span class="pure-form-message-inline">Latest Category selected by default. "X" to unselect, then enter new or existing Category.</span>
       <% end %>
 
       <br><br>
 
       <%= s.label :name, "Section" %>
-      <%= s.grouped_collection_select(:name, Category.all, :sections, :name, :name, :name, {prompt: "Enter to select or create"}, {class: "selectize", id: "select-lesson-section"}) %>
+      <%= s.grouped_collection_select(:name, Category.order(id: :desc), :sections, :name, :name, :name, {prompt: "Enter to select or create"}, {class: "selectize", id: "select-lesson-section"}) %>
       <br><br>
    <% end %>
 

@@ -18,4 +18,4 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 Rails.application.config.assets.paths << "#{Rails.root}/app/assets/videos"
 Rails.application.config.assets.paths << "#{Rails.root}/app/assets/images"
 
-Rails.application.config.assets.precompile += %w(landing.css buttons.css lessons/new.js)
+Rails.application.config.assets.precompile += %w(landing.css buttons.css)
