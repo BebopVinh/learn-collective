@@ -2,6 +2,7 @@ class Lesson < ApplicationRecord
    has_many :contributions
    has_many :users, through: :contributions
    belongs_to :section
+   has_one :category, through: :section
 
    validates_presence_of :name, :creator_id
 
