@@ -12,6 +12,8 @@
  *
  *= require font-awesome
  *= require trix
+ *= require selectize
+ *= require selectize.default
  *= require_self
  */
 
