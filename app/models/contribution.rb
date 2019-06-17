@@ -5,7 +5,4 @@ class Contribution < ActiveRecord::Base
 
    validates :content, presence: true
 
-   # def self.order_by_name(user)
-   #    where(user: user).joins(:lesson).order(:name)
-   # end
 end
