@@ -42,7 +42,7 @@ $(document).on('ready page:load', function () {
       }], // Another optional usage, with a custom status bar item that counts keystrokes
       styleSelectedText: false,
       tabSize: 2,
-      toolbar: ["preview", "|", "bold", "italic", "strikethrough", "|", "heading", "code", "|", "unordered-list", "ordered-list", "|", "link", "image", "|", "fullscreen"],
+      toolbar: ["preview", "|", "bold", "italic", "strikethrough", "|", "heading", "code", "|", "unordered-list", "ordered-list", "|", "link", "image", "|", "guide", "fullscreen"],
       toolbarTips: true
    })
 })
