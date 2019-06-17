@@ -58,6 +58,10 @@ $(document).on('ready page:load', function () {
          .done(function (contribution) {
             let contributionHTML = generateContributionHTML(contribution)
             $('div.lesson-contributions').append(contributionHTML)
+            alert("New contribution created!")
+         })
+         .fail(function () {
+            alert("Something went wrong :(")
          })
    });
 
