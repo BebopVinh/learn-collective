@@ -8,10 +8,6 @@ class ContributionsController < ApplicationController
       lesson = Lesson.find_by(id: params[:lesson_id])
       @contribution = Contribution.new(user: current_user, lesson: lesson, content: contribution_params[:content])
       if @contribution.save
-         # respond_to do |format|
-         #    format.html {redirect_to lesson_path(lesson)}
-         #    format.json {render json: @contribution}
-         # end
          render json: @contribution
       else
          redirect_to lesson_path(lesson), alert: "Content was empty."
