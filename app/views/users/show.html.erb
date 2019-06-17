@@ -7,7 +7,7 @@
 <% @contributions.each do |c| %>
    <section class="post">
       <h2 class="content-subhead">From Lesson: <%= link_to c.lesson.name, lesson_path(c.lesson) %></h2>
-            <div class="post-description trix-content"><%= sanitize c.content %></div>
+            <div class="post-description"><%= sanitize parse_content(c.content) %></div>
       <p><%= update_buttons(c) %></p>
    </section>
 <% end %>

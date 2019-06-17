@@ -1,9 +1,9 @@
 
  <% if user_signed_in? %>
-   <em><strong>Note from developer:</strong> Images uploaded will not persist because I'm too broke to afford a proper hosting service. For now, please upload your images to a site like <a href="https://imgur.com/upload" alt="Imgur Upload Link">Imgur</a> and paste the URL here. I will consider a hosting service once I have cash-money-all-day and more knowledge on how to implement such features. Thank you for reading!</em>
+   <em><strong>Note from developer:</strong> Markdown editor is here!</em>
   <br><br>
-  <%= form_for contribution, url: url do |f| %> 
-    <%= f.trix_editor :content, required: true, autofocus: true, rows:"50", cols: "100" %>
+  <%= form_for contribution, {url: url, class:"contribution-form"} do |f| %> 
+    <%= f.text_area :content, required: true, autofocus: true, rows:"25", cols: "150", class:"content-text-area" %>
     <br>
     <%= f.submit class: "pure-button button-success" %>
   <% end %>

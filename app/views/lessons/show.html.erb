@@ -25,7 +25,7 @@
          <header class="post-header">
             <h2 class="post-title">From <%= display_user(c)%></h2>
          </header>
-         <div class="post-description trix-content"><%= sanitize c.content %></div>
+         <div class="post-description"><%= sanitize parse_content(c.content) %></div>
          <p><%= update_buttons(c) %></p>
       </section>
    <% end %> 
