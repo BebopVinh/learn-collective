@@ -1,5 +1,5 @@
 $(document).on('ready page:load', function () {
-   
+
    class Lesson {
       constructor(obj) {
          this.name = obj.name
@@ -8,11 +8,12 @@ $(document).on('ready page:load', function () {
       }
    }
 
-   let currentUserId
+   let currentUserId //blank variable to store current user's id if logged in
    $.get('/authenticate/user.json', function (token) {
       currentUserId = token.id
    })
 
+   // function to generate update buttons if content belongs to current user
    function checkId(sourceId, currentUserId) {
       if (sourceId === currentUserId) {
          return true
@@ -21,28 +22,29 @@ $(document).on('ready page:load', function () {
       }
    }
 
+   function generateContributionHTML(contribution) {
+      let htmlString = `<section class="post">
+         <header class="post-header">
+            <h2 class="post-title">From ${contribution.user.username}</h2>
+         </header>
+         <div class="post-description">${contribution.parsed_content}</div>
+      `
+      if (checkId(contribution.user.id, currentUserId)) {
+         htmlString += `
+            <p>
+               <a class="pure-button pure-button-primary button-small" href="/contributions/${contribution.id}/edit">Update Contribution</a>
+            </p></section>`
+      } else {
+         htmlString += `</section>`
+      } 
+      return htmlString
+   }
+
    Lesson.prototype.contributionContent = function () {
       const contributions = this.contributions
       let resultHTML = ""
       contributions.forEach(function (contribution) {
-         resultHTML += `
-         <section class="post">
-            <header class="post-header">
-               <h2 class="post-title">From ${contribution.user.username}</h2>
-            </header>
-            <div class="post-description trix-content">
-               ${contribution.content}
-            </div>
-         `
-         if (checkId(contribution.user.id, currentUserId)) {
-            resultHTML += `
-               <p>
-                  <a class="pure-button pure-button-primary button-small" href="/contributions/${contribution.id}/edit">Update Contribution</a>
-               </p></section>
-            `
-         } else {
-            resultHTML += `</section>`
-         }
+         resultHTML += generateContributionHTML(contribution)
       })
       return resultHTML
    }
@@ -53,24 +55,14 @@ $(document).on('ready page:load', function () {
       const lessonId = parseInt($('input#lesson-id').val(), 10)
       let values = $(this).serialize();
       $.post(`/lessons/${lessonId}/contributions`, values)
-      .done(function(data) {
-         console.log(data)
-         let contributionHTML = `
-            <section class="post">
-               <header class="post-header">
-                  <h2 class="post-title">From ${data.user.username}</h2>
-               </header>
-               <div class="post-description trix-content">${data.content}</div>
-               <p>
-               <a class="pure-button pure-button-primary button-small" href="/contributions/${data.id}/edit">Update Contribution</a>
-               </p>
-            </section>`
-         $('div.lesson-contributions').append(contributionHTML)
-      })   
+         .done(function (contribution) {
+            let contributionHTML = generateContributionHTML(contribution)
+            $('div.lesson-contributions').append(contributionHTML)
+         })
    });
 
 
-   $('a.lesson-browser').click(function(event) {
+   $('a.lesson-browser').click(function (event) {
       event.preventDefault()
       let lessonId = parseInt($("input#lesson-id").val(), 10)
       if (this.id === "next") {
@@ -78,7 +70,7 @@ $(document).on('ready page:load', function () {
       } else if (this.id === "previous") {
          lessonId--
       }
-      $.get(`/lessons/${lessonId}.json`, function(lesson) {
+      $.get(`/lessons/${lessonId}.json`, function (lesson) {
          let currentLesson = new Lesson(lesson)
          $('h1.post-title').html(`Lesson: ${currentLesson.name}`)
          $('input#lesson-id').val(currentLesson.id)
