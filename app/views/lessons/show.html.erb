@@ -18,7 +18,7 @@
 
 <br><br>
 
-<h2 class="content-subhead">Comments:</h2>
+<h2 class="content-subhead">Contributions:</h2>
 <div class="lesson-contributions">
    <% @lesson.contributions.each do |c| %>
       <section class="post">
@@ -28,6 +28,7 @@
          <div class="post-description"><%= sanitize parse_content(c.content) %></div>
          <p><%= update_buttons(c) %></p>
       </section>
+      <hr class="style-1">
    <% end %> 
 </div>
 
