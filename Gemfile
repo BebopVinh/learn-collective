@@ -19,8 +19,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 ###### Markdown ######
 gem 'redcarpet'
 gem 'font-awesome-rails'
-gem 'trix-rails', require: 'trix'
-gem 'shrine'
+gem 'simplemde-rails'
 
 ###### AUTHENTICATION #######
 gem 'bcrypt', '~> 3.1.7'
@@ -35,7 +34,6 @@ gem 'dotenv'
 gem 'active_model_serializers'
 
 gem 'jquery-rails'
-
 gem 'selectize-rails'
 
 
