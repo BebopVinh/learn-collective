@@ -11,11 +11,11 @@
 // about supported directives.
 //
 //
-//= require trix
 //= require rails-ujs
 //= require activestorage
 //= require jquery
 //= require jquery_ujs
+//= require simplemde.min
 //= require selectize
 //= require_tree .
 
