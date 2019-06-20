@@ -9,8 +9,6 @@ $(document).on('ready page:load', function () {
    }
    //Invoking to get an array of lesson ids for a.lesson-browser event
    getLessonIds()
-   console.log(idsArray)
-
    class Lesson {
       constructor(obj) {
          this.name = obj.name
