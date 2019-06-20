@@ -17,7 +17,6 @@ class LessonsController < ApplicationController
    end
 
    def create
-      binding.pry
       @lesson = Lesson.new(lesson_params) do |user|
          user.creator_id = current_user.id
       end
