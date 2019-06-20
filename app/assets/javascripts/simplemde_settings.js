@@ -2,11 +2,6 @@ $(document).on('ready page:load', function () {
    //targets contribution form's text-area and convert to Simple Markdown Editor
    let simplemde = new SimpleMDE({
       element: $("textarea.content-text-area")[0],
-      // spellChecker: false,
-      // autosave: {
-      //    enabled: true,
-      //    unique_id: "demo2",
-      // }
       autofocus: true,
       forceSync: true,
       indentWithTabs: true,
