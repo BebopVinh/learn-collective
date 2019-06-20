@@ -30,6 +30,10 @@ class LessonsController < ApplicationController
 
    def index
       @lessons = Lesson.all_sorted
+      respond_to do |format|
+         format.html {render :index}
+         format.json {render json: @lessons.reverse, status: 201, each_serializer: LessonIdSerializer}
+      end
    end
 
    def show
@@ -43,7 +47,7 @@ class LessonsController < ApplicationController
             end
             format.json do
                authenticate_user!
-               render json: @lesson, status: 200, include: ['contributions.user']
+               render json: @lesson, status: 201, include: ['contributions.user']
             end 
          end
       end
