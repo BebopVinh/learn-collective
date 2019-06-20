@@ -2,5 +2,5 @@
 
 
 <%= render partial:'form', locals: {lesson: @lesson} %>
-
-<%= button_to "Delete Lesson", lesson_path(@lesson), method: :delete %>
+<br>
+<%= button_to "Delete Lesson", lesson_path(@lesson), method: :delete, class:"button-error pure-button" %>
