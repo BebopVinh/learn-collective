@@ -1,4 +1,15 @@
+const idsArray = []
 $(document).on('ready page:load', function () {
+   function getLessonIds() {
+      $.get("/lessons.json", function (lessons) {
+         lessons.forEach(lesson => {
+            idsArray.push(lesson.id)
+         })
+      })
+   }
+   //Invoking to get an array of lesson ids for a.lesson-browser event
+   getLessonIds()
+   console.log(idsArray)
 
    class Lesson {
       constructor(obj) {
@@ -69,11 +80,23 @@ $(document).on('ready page:load', function () {
    $('a.lesson-browser').click(function (event) {
       event.preventDefault()
       let lessonId = parseInt($("input#lesson-id").val(), 10)
+      let lessonIndex = idsArray.indexOf(lessonId)
       if (this.id === "next") {
-         lessonId++
+         lessonIndex++
       } else if (this.id === "previous") {
-         lessonId--
+         lessonIndex--
       }
+      lessonId = idsArray[lessonIndex]
+
+      if (lessonIndex === 0 && this.id === "previous") {
+         this.style.display = "none"
+      } else if (lessonIndex === (idsArray.length - 1) && this.id === "next") {
+         this.style.display = "none"
+      } else {
+         $('a.lesson-browser')[0].style.display = "block"
+         $('a.lesson-browser')[1].style.display = "block"
+      }
+
       $.get(`/lessons/${lessonId}.json`, function (lesson) {
          let currentLesson = new Lesson(lesson)
          $('h1.post-title').html(`Lesson: ${currentLesson.name}`)
@@ -85,7 +108,6 @@ $(document).on('ready page:load', function () {
                `<a href="/lessons/${currentLesson.id}/edit" class="pure-button button-warning">Edit this Lesson</a>`
             )
          }
-
       })
    })
 })
