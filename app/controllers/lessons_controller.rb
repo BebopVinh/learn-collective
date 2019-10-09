@@ -4,12 +4,6 @@ class LessonsController < ApplicationController
    before_action :authenticate_user!, except: [:index, :show]
    before_action :check_creator, only: [:edit, :update, :destroy]
 
-   # WIP: Filtered Sections based on Category Selection
-   # def filtered_sections
-   #    @sections = Category.filtered_sections(params[:category_name])
-   #    render json: @sections, status: 201, include: [:id, :name]
-   # end
-
    def new
       @lesson = Lesson.new
       @section = @lesson.build_section
@@ -46,7 +40,6 @@ class LessonsController < ApplicationController
                render :show
             end
             format.json do
-               authenticate_user!
                render json: @lesson, status: 201, include: ['contributions.user']
             end 
          end
