@@ -1,34 +1,36 @@
-<a href="javascript:" class="lesson-browser" id="previous">< Previous</a>
-..
-<a href="javascript:" class="lesson-browser" id="next">Next ></a>
+<div class="lesson-show">
+   <a href="javascript:" class="lesson-browser" id="previous">< Previous</a>
+   ..
+   <a href="javascript:" class="lesson-browser" id="next">Next ></a>
 
-<h1 class="post-title">Lesson: <%= @lesson.clean_name %></h1>
-<%= hidden_field_tag "lesson-id", @lesson.id %>
+   <h1 class="post-title">Lesson: <%= @lesson.clean_name %></h1>
+   <%= hidden_field_tag "lesson-id", @lesson.id %>
 
-<div class="edit-button">
-<%= link_to "Edit this Lesson", edit_lesson_path(@lesson), class: "pure-button button-warning" if @lesson.creator_is?(current_user) %>
-</div>
-
-
-<h4 class="content-subhead">Add Hints and Tips For This Lesson</h4>
-<section class="post">
-   <%= render partial: 'contributions/form', locals: {contribution: @contribution, url: lesson_contributions_path(@lesson)} %>
-</section>
+   <div class="edit-button">
+   <%= link_to "Edit this Lesson", edit_lesson_path(@lesson), class: "pure-button button-warning" if @lesson.creator_is?(current_user) %>
+   </div>
 
 
-<br><br>
+   <h4 class="content-subhead">Add Hints and Tips For This Lesson</h4>
+   <section class="post">
+      <%= render partial: 'contributions/form', locals: {contribution: @contribution, url: lesson_contributions_path(@lesson)} %>
+   </section>
 
-<h2 class="content-subhead">Contributions:</h2>
-<div class="lesson-contributions">
-   <% @lesson.contributions.each do |c| %>
-      <section class="post">
-         <header class="post-header">
-            <h2 class="post-title">From <%= display_user(c)%></h2>
-         </header>
-         <div class="post-description"><%= sanitize parse_content(c.content) %></div>
-         <p><%= update_buttons(c) %></p>
-      </section>
-      <hr class="style-1">
-   <% end %> 
+
+   <br><br>
+
+   <h2 class="content-subhead">Contributions:</h2>
+   <div class="lesson-contributions">
+      <% @lesson.contributions.each do |c| %>
+         <section class="post">
+            <header class="post-header">
+               <h2 class="post-title">From <%= display_user(c)%></h2>
+            </header>
+            <div class="post-description"><%= sanitize parse_content(c.content) %></div>
+            <p><%= update_buttons(c) %></p>
+         </section>
+         <hr class="style-1">
+      <% end %> 
+   </div>
 </div>
 

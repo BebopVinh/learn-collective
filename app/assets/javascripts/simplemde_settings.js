@@ -18,7 +18,6 @@ $(document).on('ready page:load', function () {
          underscoresBreakWords: true,
       },
       placeholder: "Type here...",
-      promptURLs: true,
       renderingConfig: {
          singleLineBreaks: false,
          codeSyntaxHighlighting: true,
